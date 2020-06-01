@@ -1,0 +1,12 @@
+apiVersion: v1  ## version kubernetes API
+kind: PersistentVolume  ## you are describing a pod
+metadata:
+  name: pv-1  ## name of pod
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadOnlyMany
+  storageClassName: slow
+  hostPath:
+    path: "/localstorage"

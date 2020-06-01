@@ -1,0 +1,18 @@
+apiVersion: v1  ## version kubernetes API
+kind: ReplicationController  ## ReplicationControl manifest type
+metadata:
+  name: web-app  ## name of ReplicationController
+spec:
+  replicas: 1  ## the desired number of pod instances
+  selector:
+    app: web-app-app  
+  template:
+    metadata:
+      labels:
+        app: web-app-app
+    spec:
+      containers:
+      - name: web-container
+        image: nginx
+        ports:
+        - containerPort: 80

@@ -1,0 +1,19 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-tomcat
+  namespace: custom-namespace
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-tomcat
+  template:
+    metadata:
+      labels:
+        app: my-tomcat
+    spec:
+      containers:
+      - image: tomcat
+        name: tomcat

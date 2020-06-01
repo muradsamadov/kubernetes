@@ -1,0 +1,15 @@
+apiVersion: v1  ## version kubernetes API
+kind: Pod  ## you are describing a pod
+metadata:
+  name: web-app-v2  ## name of pod
+  labels:
+    creation_mehtod: manual
+    env: prod
+    yasayir_yeri: yeni-yasamal
+spec:
+  containers:
+  - image: nginx  ## container image to create the container from
+    name: web  ## name of the container
+    ports:
+    - containerPort: 80  ## the port the app is listening on
+      protocol: TCP

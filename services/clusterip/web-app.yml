@@ -1,0 +1,12 @@
+apiVersion: v1  ## version kubernetes API
+kind: Pod  ## you are describing a pod
+metadata:
+  name: myapp-pod  ## name of pod
+  labels:
+    app: myapp
+    type: back-end
+
+spec:
+  containers:
+  - image: nginx  ## container image to create the container from
+    name: web  ## name of the container

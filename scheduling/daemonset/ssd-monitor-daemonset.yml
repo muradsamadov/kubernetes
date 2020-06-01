@@ -1,0 +1,18 @@
+apiVersion: apps/v1  ## version kubernetes API
+kind: DaemonSet  ## ReplicaSet manifest type
+metadata:
+  name: ssd-monitor  ## name of ReplicaSet
+spec:
+  selector:
+    matchLabels:  ## You’re using the simpler matchLabels selector here, which is much like a ReplicationController’s selector.
+      app: ssd-monitor  
+  template:
+    metadata:
+      labels:
+        app: ssd-monitor
+    spec:
+      nodeSelector:
+        disk: ssd
+      containers:
+      - name: ssd-monitor-container
+        image: luksa/ssd-monitor

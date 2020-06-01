@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1  ## version kubernetes API
+kind: Ingress  ## ReplicationControl manifest type
+metadata:
+  name: web-app-ingress  ## name of ReplicationController
+spec:
+  rules:
+  - host: web-app.com
+    http:
+      paths:
+      - path: /  
+        backend:
+          serviceName: web-app
+          servicePort: 8080

@@ -1,0 +1,10 @@
+apiVersion: v1  ## version kubernetes API
+kind: Service  ## ReplicationControl manifest type
+metadata:
+  name: web-app  ## name of ReplicationController
+spec:
+  ports:
+  - port: 8080
+    targetPort: 80
+  selector:
+    app: web-app-app
