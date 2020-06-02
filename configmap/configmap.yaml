@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mosquitto-config-file
+data:
+  mosquitto.conf: |  ##name of the config file. Bu bizim isleyen kontainerin config fayli ile eyni olmalidir. sohbet konfig faylin adindan gedir
+    log_dest stdout  
+    log_type all
+    log_timestamp true
+    listener 9001
+## yuxarida qeyd olunan 4 setr ise hemin konfig faylin daxilindeki yazilardir

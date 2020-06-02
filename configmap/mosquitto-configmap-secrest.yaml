@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto
+  labels:
+    app: mosquitto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      containers:
+        - name: mosquitto
+          image: eclipse-mosquitto:1.6.2
+          ports:
+            - containerPort: 1883
+          volumeMounts:
+            - name: mosquitto-conf
+              mountPath: /mosquitto/config  ## hemin yaradacagimiz kontainerin hansi app isledeceyikse onun konfig faylinin yoludur ve biz bunu evvelceden bilmeliyikki neler ora mount olsun
+            - name: mosquitto-secret
+              mountPath: /mosquitto/secret  ## elecede secret faylinin yolu. eger bu fayl kontainerde yoxdursa orada yenisini yaradacaq
+              readOnly: true  ## bu secret faylina ancaq readonly ozelliyi versin
+      volumes:  ##burada mount isi gedirki, bizim yaratdigimiz configmap ve secrets ler hemin pod a mount olsun
+        - name: mosquitto-conf
+          configMap:
+            name: mosquitto-config-file  ##yaratdigimiz configmap in adini bura eynisi ile copy edirik
+        - name: mosquitto-secret
+          secret:
+            secretName: mosquitto-secret-file  ##yaratdigimiz secrets faylinin in adini bura eynisi ile copy edirik
