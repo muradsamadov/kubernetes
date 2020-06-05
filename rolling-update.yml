@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kubernetes.io/change-cause: "Deploy 1.17 container"  ## annotations ile sen her defe deploy edende hemin deploye comment kimi nese atirsan ve "kubectl rollout history deploy nginx-deploy" komandasi ile buna emin ola bilirikki en axirinci revisiona dusur
+  labels:
+    run: nginx
+  name: nginx-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: nginx
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  minReadySeconds: 5
+  revisionHistoryLimit: 3  ## revision olaraq ne qeder geri qayida bilersen, yeniki sen misal ucun 5 dene rollingupdate etmisense "kubectl rollout history deploy nginx-deploy --revision 1" edib geri qayitmaq olmur, cunki max 3 dene revision qoyulub
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx:1.17
+        name: nginx
