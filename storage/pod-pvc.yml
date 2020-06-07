@@ -1,0 +1,16 @@
+apiVersion: v1  
+kind: Pod
+metadata:
+  name: web
+spec:
+  containers:
+  - name: my-web
+    image: nginx
+    volumeMounts:
+    - mountPath: /var/www/html
+      name: my-pvc
+  volumes:
+  - name: my-pvc
+    persistentVolumeClaim:
+      claimName: pvc-1
+

@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job  ## type olaraq job secirik
+metadata:
+  name: helloworld  ## job un adi
+spec:
+  completions: 2  ## job 2 defe ardicil olaraq run edir
+  parallelism: 2  ## paralel olaraq 2 job calissin
+  template:
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        command: ["sleep", "15"]  
+      restartPolicy: Never

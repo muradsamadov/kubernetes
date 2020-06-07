@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job  ## type olaraq job secirik
+metadata:
+  name: helloworld  ## job un adi
+spec:
+  template:
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        command: ["echo", "Hello Kubernetes!!!"]  ## kontainer ise dusende bu komandani icra etsin. Yeniki bu job sadece olaraq bu komandani icra edecek kontainer daxilinde
+      restartPolicy: Never

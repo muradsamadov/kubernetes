@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job  ## type olaraq job secirik
+metadata:
+  name: helloworld  ## job un adi
+spec:
+  activeDeadlineSeconds: 10  ## her ne olmasina baxmayaraq bur qeyd edilen 10 saniye qeder job calisir ve terminate olunur. Yeniki pod silinir
+  template:
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        command: ["sleep", "15"]  
+      restartPolicy: Never
