@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replicaset
+  labels:
+    app: myapp
+    type: front-end
+
+spec:
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+       app: myapp
+       type: front-end
+
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+      tolerations:  ## burada worker-node-1 node-a malik olan key,value qeyd edirem
+        - key: "key1"
+          operator: "Equal"
+          value: "value1"
+          effect: "NoSchedule"
+
+
+  replicas: 5
+  selector:
+    matchLabels:
+      type: front-end

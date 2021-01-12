@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod-7
+  labels:
+    app: myapp
+    type: front-end
+
+spec:
+  containers:
+    - name: nginx-container-7
+      image: nginx
+  nodeSelector:  ## burada hemin node-da olan labeli qeyd edirik
+    demoserver: "true"

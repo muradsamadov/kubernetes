@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kubernetes.io/change-cause: "Deploy 1.18.0-alpine container"
+  name: myapp-deployment
+  labels:
+    app: myapp
+    type: front-end
+
+spec:
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+       app: myapp
+       type: front-end
+
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.18.0-alpine
+#  strategy:
+#    type: RollingUpdate
+
+  replicas: 3
+  selector:
+    matchLabels:
+      type: front-end
+
+
+
+
+
+
+
+
