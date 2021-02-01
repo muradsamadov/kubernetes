@@ -1,0 +1,29 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: new-joiner
+  namespace: default
+
+rules:
+  - apiGroups: ["","apps","autoscaling","extensions"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: put-specific-user-or-users-into-new-joiner-role
+  namespace: default
+
+subjects:
+  - kind: User
+    name: francis
+
+
+roleRef:
+  kind: Role
+  name: new-joiner
+  apiGroup: rbac.authorization.k8s.io
+
+

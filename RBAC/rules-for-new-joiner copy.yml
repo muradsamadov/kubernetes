@@ -1,0 +1,54 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: new-joiner
+
+rules:
+  - apiGroups: ["","apps","autoscaling","extensions"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: put-specific-user-or-users-into-new-joiner-role
+
+subjects:
+  - kind: User
+    name: francis
+
+
+roleRef:
+  kind: ClusterRole
+  name: new-joiner
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: new-joiner
+  namespace: playground
+
+rules:
+  - apiGroups: ["","apps","autoscaling","extensions"]
+    resources: ["*"]
+    verbs: ["*"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: new-joiners-role-binding
+  namespace: playground
+
+subjects:
+  - kind: User
+    name: francis
+
+
+roleRef:
+  kind: Role
+  name: new-joiner
+  apiGroup: rbac.authorization.k8s.io
